@@ -8,3 +8,15 @@ The initial concept was a talking bob ross mint tin that has both built in and L
 
 Libraries used:
 OpenAi SDK - whisper(stt)/llm integration
+
+
+`/boot/firmware/config.txt` <--- where to handle adding dtoverlays for new cards currently using google hat for both mic AND DAC
+
+Using SOX to amplify prior to sending audio to DAC:
+`sox /tmp/test3.wav -t alsa plughw:1,0 vol 3`
+
+Common commands:
+`aplay -l` `arecord -l` -List devices avaiable from dtoverlay
+
+`aplay -D plughw:1,0 /tmp/banjo.wav` <--- play using card 1 device 0, plug allows prehandling of audio for auto conversion of sample rate etc.. at minimal cost
+`arecord -D plughw:1,0 -c 2 -r 48000 -f S16_LE -d 15 /tmp/banjo.wav` <--- record needs all the flags. -c for stero/mono -r for sample rate -d for duration 
